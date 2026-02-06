@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legacy Collection - 12 Retro Games</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0a0a1a;
+  color: #ccc;
+  font-family: 'Press Start 2P', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scanline overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  z-index: 9999;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 56px;
+  padding-top: 20px;
+}
+
+.title {
+  font-size: 36px;
+  color: #0ff;
+  text-shadow:
+    0 0 10px #0ff,
+    0 0 30px rgba(0, 255, 255, 0.3),
+    4px 4px 0 #0a0a1a;
+  letter-spacing: 4px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #f0f;
+  text-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+.divider {
+  width: 320px;
+  max-width: 80%;
+  height: 2px;
+  margin: 28px auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #0ff 20%,
+    #f0f 50%,
+    #ff0 80%,
+    transparent
+  );
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+/* Game Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Game Card */
+.card {
+  background: #12122a;
+  border: 2px solid #1a1a3a;
+  position: relative;
+  cursor: default;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: var(--accent);
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    4px 4px 0 0 var(--accent),
+    0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.card-body {
+  padding: 20px 18px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-number {
+  font-size: 10px;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.card-title {
+  font-size: 13px;
+  color: #eee;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  text-shadow: 2px 2px 0 #0a0a1a;
+}
+
+.card-genre {
+  display: inline-block;
+  font-size: 7px;
+  color: #0a0a1a;
+  background: var(--accent);
+  padding: 4px 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  align-self: flex-start;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+.card-desc {
+  font-size: 8px;
+  color: #777;
+  line-height: 1.8;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.play-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: #0a0a1a;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 3px;
+  transition: background 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
+  box-shadow:
+    4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.play-btn:hover {
+  filter: brightness(1.2);
+  box-shadow:
+    2px 2px 0 rgba(0, 0, 0, 0.5);
+  transform: translate(2px, 2px);
+}
+
+.play-btn:active {
+  box-shadow: none;
+  transform: translate(4px, 4px);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 64px;
+  padding: 32px 0 16px;
+  border-top: 2px solid #1a1a3a;
+}
+
+.footer-text {
+  font-size: 8px;
+  color: #444;
+  letter-spacing: 2px;
+  line-height: 2;
+}
+
+/* Responsive */
+@media (max-width: 1080px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .title {
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    font-size: 11px;
+    letter-spacing: 4px;
+  }
+  .container {
+    padding: 28px 16px 48px;
+  }
+  .header {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .title {
+    font-size: 16px;
+  }
+  .subtitle {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header class="header">
+    <h1 class="title">LEGACY COLLECTION</h1>
+    <p class="subtitle">12 Retro Games</p>
+    <div class="divider"></div>
+  </header>
+
+  <main class="grid" id="gameGrid"></main>
+
+  <footer class="footer">
+    <p class="footer-text">Built with HTML5 Canvas + Vanilla JS</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var games = [
+    { title: "Space Shooter",        folder: "space-shooter",        genre: "Vertical Shooter",       desc: "Defend the galaxy against alien waves" },
+    { title: "Flappy Chicken",       folder: "flappy-chicken",       genre: "Arcade",                 desc: "Flap through obstacles and defeat bosses" },
+    { title: "Grotto Escape",        folder: "grotto-escape",        genre: "Cave Platformer",        desc: "Explore dangerous caverns" },
+    { title: "Underwater Diving",    folder: "underwater-diving",    genre: "Action",                 desc: "Dive deep and survive the ocean" },
+    { title: "Gothicvania Swamp",    folder: "gothicvania-swamp",    genre: "Platformer",             desc: "Battle through the haunted swamp" },
+    { title: "Gothicvania Cemetery", folder: "gothicvania-cemetery", genre: "Action Platformer",      desc: "Fight undead in the graveyard" },
+    { title: "Magic Cliffs",         folder: "magic-cliffs",         genre: "Exploration Platformer", desc: "Climb mystical cliff faces" },
+    { title: "Warped Caves",         folder: "warped-caves",         genre: "Run-and-Gun",            desc: "Wall-cling and blast through caves" },
+    { title: "Streets of Fight",     folder: "streets-of-fight",     genre: "Beat 'em Up",            desc: "Brawl through city streets" },
+    { title: "Tiny RPG Forest",      folder: "tiny-rpg-forest",      genre: "Top-Down RPG",           desc: "Adventure through enchanted woods" },
+    { title: "Warped City",          folder: "warped-city",          genre: "Cyberpunk Shooter",      desc: "Fight across neon-lit rooftops" },
+    { title: "Top-Down Shooter",     folder: "top-down-shooter",     genre: "Twin-Stick Shooter",     desc: "Clear sci-fi dungeon floors" }
+  ];
+
+  var colors = [
+    "#0ff", "#f0f", "#ff0", "#0f0",
+    "#f80", "#88f", "#f44", "#4ff",
+    "#fa0", "#8f4", "#f4a", "#4af"
+  ];
+
+  var grid = document.getElementById("gameGrid");
+
+  for (var i = 0; i < games.length; i++) {
+    var g = games[i];
+    var c = colors[i];
+    var num = i + 1;
+    var numStr = num < 10 ? "0" + num : "" + num;
+
+    var card = document.createElement("div");
+    card.className = "card";
+    card.style.setProperty("--accent", c);
+
+    var body = document.createElement("div");
+    body.className = "card-body";
+
+    var numberEl = document.createElement("div");
+    numberEl.className = "card-number";
+    numberEl.textContent = "// GAME " + numStr;
+
+    var titleEl = document.createElement("div");
+    titleEl.className = "card-title";
+    titleEl.textContent = g.title;
+
+    var genreEl = document.createElement("span");
+    genreEl.className = "card-genre";
+    genreEl.textContent = g.genre;
+
+    var descEl = document.createElement("div");
+    descEl.className = "card-desc";
+    descEl.textContent = g.desc;
+
+    var playBtn = document.createElement("a");
+    playBtn.className = "play-btn";
+    playBtn.href = g.folder + "/index.html";
+    playBtn.textContent = "PLAY";
+
+    body.appendChild(numberEl);
+    body.appendChild(titleEl);
+    body.appendChild(genreEl);
+    body.appendChild(descEl);
+    body.appendChild(playBtn);
+    card.appendChild(body);
+    grid.appendChild(card);
+  }
+})();
+</script>
+
+</body>
+</html>
