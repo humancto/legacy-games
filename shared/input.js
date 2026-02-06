@@ -75,6 +75,25 @@ class Input {
   }
 }
 
+// Global Input singleton so games can call Input.justPressed() / Input.isDown() as static methods
+Input._global = null;
+Input._getGlobal = function () {
+  if (!Input._global) Input._global = new Input();
+  return Input._global;
+};
+Input.isDown = function (key) {
+  return Input._getGlobal().isDown(key);
+};
+Input.justPressed = function (key) {
+  return Input._getGlobal().justPressed(key);
+};
+Input.justReleased = function (key) {
+  return Input._getGlobal().justReleased(key);
+};
+Input.endFrame = function () {
+  return Input._getGlobal().endFrame();
+};
+
 // Global Keyboard compatibility layer for games that use Keyboard.isDown/justPressed/update
 const Keyboard = {
   _input: new Input(),
