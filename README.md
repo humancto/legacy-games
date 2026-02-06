@@ -1,6 +1,6 @@
 # Legacy Games Collection
 
-Built by [Human CTO](https://www.linkedin.com/in/archithr/) | [GitHub](https://github.com/humancto)
+Built by [Human CTO](https://www.humancto.com/) | [LinkedIn](https://www.linkedin.com/in/archithr/) | [GitHub](https://github.com/humancto)
 
 A collection of 12 retro-style HTML5 Canvas games built with vanilla JavaScript. No frameworks, no build tools -- just open in a browser and play.
 
