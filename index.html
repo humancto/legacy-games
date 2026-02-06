@@ -73,6 +73,25 @@ body::after {
   text-transform: uppercase;
 }
 
+.built-by {
+  font-size: 14px;
+  color: #fff;
+  margin-top: 16px;
+  letter-spacing: 2px;
+}
+
+.built-by a {
+  color: #0ff;
+  text-decoration: none;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  transition: color 0.2s;
+}
+
+.built-by a:hover {
+  color: #fff;
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.8);
+}
+
 .divider {
   width: 320px;
   max-width: 80%;
@@ -264,14 +283,14 @@ body::after {
   <header class="header">
     <h1 class="title">LEGACY COLLECTION</h1>
     <p class="subtitle">12 Retro Games</p>
+    <p class="built-by">Built by <a href="https://www.linkedin.com/in/archithr/" target="_blank" rel="noopener">Human CTO</a> &middot; <a href="https://github.com/humancto" target="_blank" rel="noopener">GitHub</a></p>
     <div class="divider"></div>
   </header>
 
   <main class="grid" id="gameGrid"></main>
 
   <footer class="footer">
-    <p class="footer-text">Built with HTML5 Canvas + Vanilla JS</p>
-    <p class="footer-text" style="margin-top:12px">Pixel Art by <a href="https://itch.io/c/392202/ansimuz-games" target="_blank" rel="noopener" style="color:#0ff;text-decoration:none">Ansimuz</a></p>
+    <p class="footer-text">Built with HTML5 Canvas + Vanilla JS by <a href="https://www.linkedin.com/in/archithr/" target="_blank" rel="noopener" style="color:#0ff;text-decoration:none">Human CTO</a> &middot; <a href="https://github.com/humancto" target="_blank" rel="noopener" style="color:#0ff;text-decoration:none">GitHub</a></p>
   </footer>
 </div>
 
